@@ -681,7 +681,7 @@ export default function App() {
               <article className="overflow-hidden rounded-2xl bg-zinc-900/60 border border-zinc-800">
                 <div className="h-40 bg-white p-8 flex items-center justify-center">
                   <img
-                    src="/images/cornerstone.svg"
+                    src={`${import.meta.env.BASE_URL}images/cornerstone.svg`}
                     alt="Cornerstone OnDemand logo"
                     className="w-full h-full object-contain"
                     loading="lazy"
