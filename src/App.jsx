@@ -402,7 +402,7 @@ export default function App() {
   });
   const [formSubmitted, setFormSubmitted] = useState(false);
 
-  const emailAddress = 'gokul.rails.dev@example.com';
+  const emailAddress = 'gokulpom@gmail.com';
 
   // Close modals on Escape key
   useEffect(() => {
