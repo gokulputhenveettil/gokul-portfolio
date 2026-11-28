@@ -126,3 +126,105 @@ code {
   padding: 4px 8px;
   background: var(--code-bg);
 }
+
+@media print {
+  @page {
+    size: A4;
+    margin: 14mm;
+  }
+
+  html,
+  body,
+  #root {
+    display: block !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: visible !important;
+    border: 0 !important;
+    background: #fff !important;
+    color: #111 !important;
+  }
+
+  .portfolio-app {
+    min-height: 0 !important;
+    overflow: visible !important;
+    background: #fff !important;
+    color: #111 !important;
+  }
+
+  .portfolio-app > :not(.resume-print-overlay) {
+    display: none !important;
+  }
+
+  .resume-print-overlay {
+    position: static !important;
+    display: block !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: #fff !important;
+    backdrop-filter: none !important;
+  }
+
+  .resume-print-paper {
+    width: auto !important;
+    max-width: none !important;
+    max-height: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: visible !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    background: #fff !important;
+    color: #111 !important;
+    box-shadow: none !important;
+    font-size: 10pt !important;
+    line-height: 1.4 !important;
+  }
+
+  .resume-print-paper * {
+    border-color: #d1d5db !important;
+    background: transparent !important;
+    color: #111 !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+
+  .resume-print-paper h3 {
+    margin: 0 !important;
+    font-size: 18pt !important;
+    line-height: 1.2 !important;
+  }
+
+  .resume-print-paper h4 {
+    margin-bottom: 5pt !important;
+    color: #be123c !important;
+    font-size: 9pt !important;
+  }
+
+  .resume-print-paper p,
+  .resume-print-paper li {
+    font-size: 9.5pt !important;
+    line-height: 1.4 !important;
+  }
+
+  .resume-print-content {
+    margin-top: 14pt !important;
+  }
+
+  .resume-print-paper .resume-print-content > :not([hidden]) ~ :not([hidden]) {
+    margin-top: 12pt !important;
+  }
+
+  .resume-print-section {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .resume-print-controls,
+  .resume-print-close {
+    display: none !important;
+  }
+}

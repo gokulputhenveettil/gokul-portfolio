@@ -22,11 +22,14 @@ import {
   ChevronRight,
   BookOpen,
   Send,
-  Printer,
   Box,
   Workflow,
-  Zap
 } from 'lucide-react';
+import {
+  ArchitectureModal,
+  EngineeringNoteModal,
+  ResumeModal
+} from './components/PortfolioModals';
 
 // ============================================================================
 // DATA & CONTENT CONFIGURATION
@@ -451,7 +454,7 @@ export default function App() {
   ];
 
   return (
-    <div className="min-h-screen bg-zinc-950 text-zinc-100 font-sans selection:bg-rose-500/30 selection:text-rose-200 relative overflow-x-hidden">
+    <div className="portfolio-app min-h-screen bg-zinc-950 text-zinc-100 font-sans selection:bg-rose-500/30 selection:text-rose-200 relative overflow-x-hidden">
       {/* Subtle Technical Grid Background */}
       <div
         className="fixed inset-0 pointer-events-none opacity-[0.035]"
@@ -467,7 +470,7 @@ export default function App() {
       {/* ==================================================================== */}
       {/* NAVIGATION BAR                                                       */}
       {/* ==================================================================== */}
-      <header className="sticky top-0 z-40 border-b border-zinc-800/80 bg-zinc-950/85 backdrop-blur-md">
+      <header className="fixed inset-x-0 top-0 z-40 border-b border-zinc-800/80 bg-zinc-950/85 backdrop-blur-md">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
           {/* Brand Monogram */}
           <a
@@ -559,7 +562,7 @@ export default function App() {
         )}
       </header>
 
-      <main className="relative z-10">
+      <main className="relative z-10 pt-16">
         {/* ================================================================== */}
         {/* HERO SECTION                                                       */}
         {/* ================================================================== */}
@@ -725,7 +728,7 @@ export default function App() {
         {/* ================================================================== */}
         <section
           id="case-studies"
-          className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 border-t border-zinc-900"
+          className="scroll-mt-20 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 border-t border-zinc-900"
         >
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
             <div>
@@ -871,7 +874,7 @@ export default function App() {
         {/* ================================================================== */}
         <section
           id="capabilities"
-          className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 border-t border-zinc-900"
+          className="scroll-mt-20 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 border-t border-zinc-900"
         >
           <div className="mb-10">
             <div className="inline-flex items-center gap-2 text-xs font-mono text-cyan-400 uppercase tracking-widest mb-2">
@@ -923,7 +926,7 @@ export default function App() {
         {/* ================================================================== */}
         <section
           id="notes"
-          className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 border-t border-zinc-900"
+          className="scroll-mt-20 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 border-t border-zinc-900"
         >
           <div className="mb-10">
             <div className="inline-flex items-center gap-2 text-xs font-mono text-emerald-400 uppercase tracking-widest mb-2">
@@ -973,7 +976,7 @@ export default function App() {
         {/* ================================================================== */}
         <section
           id="contact"
-          className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 border-t border-zinc-900"
+          className="scroll-mt-20 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 border-t border-zinc-900"
         >
           <div className="rounded-3xl bg-gradient-to-br from-zinc-900/90 via-zinc-900/70 to-zinc-950 border border-zinc-800 p-6 sm:p-10 lg:p-12">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
@@ -1187,249 +1190,18 @@ export default function App() {
         </div>
       </footer>
 
-      {/* ==================================================================== */}
-      {/* MODAL 1: SYSTEM ARCHITECTURE INSPECTOR                               */}
-      {/* ==================================================================== */}
-      {selectedCaseStudy && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm"
-          onClick={() => setSelectedCaseStudy(null)}
-        >
-          <div
-            className="w-full max-w-3xl max-h-[90vh] overflow-y-auto rounded-2xl bg-zinc-950 border border-zinc-800 p-6 sm:p-8 shadow-2xl"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div className="flex items-start justify-between gap-4 pb-5 border-b border-zinc-800">
-              <div>
-                <div className="text-xs font-mono text-rose-400 uppercase tracking-wider mb-1">
-                  System Architecture Blueprint
-                </div>
-                <h3 className="text-xl sm:text-2xl font-bold text-white">
-                  {selectedCaseStudy.title}
-                </h3>
-              </div>
-              <button
-                onClick={() => setSelectedCaseStudy(null)}
-                className="p-2 rounded-lg bg-zinc-900 text-zinc-400 hover:text-white border border-zinc-800 cursor-pointer"
-              >
-                <X className="w-5 h-5" />
-              </button>
-            </div>
-
-            {/* Visual Flow Layers */}
-            <div className="my-6 space-y-3">
-              <div className="text-xs font-mono uppercase tracking-wider text-zinc-400 mb-2">
-                Data &amp; Execution Topology
-              </div>
-              {selectedCaseStudy.architectureDiagram.map((tier, idx) => (
-                <div key={idx} className="space-y-2">
-                  <div className={`p-4 rounded-xl border ${tier.color}`}>
-                    <div className="text-[11px] font-mono uppercase tracking-wider opacity-80 mb-2">
-                      Layer {idx + 1}: {tier.layer}
-                    </div>
-                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
-                      {tier.nodes.map((node) => (
-                        <div
-                          key={node}
-                          className="px-3 py-2 rounded-lg bg-zinc-950/90 border border-zinc-800 text-xs font-mono text-zinc-200 text-center"
-                        >
-                          {node}
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                  {idx < selectedCaseStudy.architectureDiagram.length - 1 && (
-                    <div className="flex justify-center text-zinc-600 text-xs font-mono">
-                      ↓ async / low-latency boundary ↓
-                    </div>
-                  )}
-                </div>
-              ))}
-            </div>
-
-            {/* Engineering Trade-offs */}
-            <div className="p-5 rounded-xl bg-zinc-900/70 border border-zinc-800 space-y-3">
-              <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-amber-400">
-                <Zap className="w-4 h-4" />
-                Key Architectural Trade-offs &amp; Safeguards
-              </div>
-              <ul className="space-y-2.5">
-                {selectedCaseStudy.tradeoffs.map((item, idx) => (
-                  <li
-                    key={idx}
-                    className="text-xs sm:text-sm text-zinc-300 leading-relaxed flex items-start gap-2.5"
-                  >
-                    <span className="text-rose-400 font-mono mt-0.5">→</span>
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* ==================================================================== */}
-      {/* MODAL 2: ENGINEERING NOTE READER                                     */}
-      {/* ==================================================================== */}
-      {selectedNote && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm"
-          onClick={() => setSelectedNote(null)}
-        >
-          <div
-            className="w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-2xl bg-zinc-950 border border-zinc-800 p-6 sm:p-8 shadow-2xl"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div className="flex items-start justify-between gap-4 pb-4 border-b border-zinc-800">
-              <div>
-                <div className="text-xs font-mono text-emerald-400 mb-1">
-                  {selectedNote.date} · {selectedNote.tag}
-                </div>
-                <h3 className="text-xl font-bold text-white leading-snug">
-                  {selectedNote.title}
-                </h3>
-              </div>
-              <button
-                onClick={() => setSelectedNote(null)}
-                className="p-2 rounded-lg bg-zinc-900 text-zinc-400 hover:text-white border border-zinc-800 cursor-pointer"
-              >
-                <X className="w-5 h-5" />
-              </button>
-            </div>
-
-            <div className="my-5 space-y-4">
-              <p className="text-sm text-zinc-300 leading-relaxed">
-                {selectedNote.summary}
-              </p>
-
-              <div className="space-y-2.5">
-                <div className="text-xs font-mono uppercase tracking-wider text-zinc-400">
-                  Production Guidelines
-                </div>
-                {selectedNote.keyTakeaways.map((point, idx) => (
-                  <div
-                    key={idx}
-                    className="p-3.5 rounded-xl bg-zinc-900/70 border border-zinc-800/90 text-xs sm:text-sm text-zinc-300 leading-relaxed flex gap-2.5"
-                  >
-                    <span className="font-mono text-rose-400 font-bold">
-                      0{idx + 1}.
-                    </span>
-                    <span>{point}</span>
-                  </div>
-                ))}
-              </div>
-
-              <div>
-                <div className="text-xs font-mono uppercase tracking-wider text-zinc-400 mb-2">
-                  Reference Implementation (Ruby)
-                </div>
-                <pre className="p-4 rounded-xl bg-zinc-900 border border-zinc-800 text-xs font-mono text-cyan-200 overflow-x-auto leading-relaxed">
-                  <code>{selectedNote.codeSnippet}</code>
-                </pre>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* ==================================================================== */}
-      {/* MODAL 3: PRINTABLE / EXECUTIVE RESUME PREVIEW                        */}
-      {/* ==================================================================== */}
-      {isResumeOpen && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm"
-          onClick={() => setIsResumeOpen(false)}
-        >
-          <div
-            className="w-full max-w-3xl max-h-[90vh] overflow-y-auto rounded-2xl bg-zinc-950 border border-zinc-800 p-6 sm:p-8 shadow-2xl"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div className="flex flex-wrap items-center justify-between gap-4 pb-5 border-b border-zinc-800">
-              <div>
-                <h3 className="text-xl font-bold text-white">
-                  Gokul — Executive Engineering Resume
-                </h3>
-                <p className="text-xs font-mono text-zinc-400 mt-0.5">
-                  9.3+ Years · Ruby on Rails · Distributed Systems · React
-                </p>
-              </div>
-              <div className="flex items-center gap-2.5">
-                <button
-                  onClick={() => window.print()}
-                  className="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg bg-rose-600 hover:bg-rose-500 text-white text-xs font-mono font-semibold cursor-pointer"
-                >
-                  <Printer className="w-3.5 h-3.5" />
-                  Print / Save PDF
-                </button>
-                <button
-                  onClick={() => setIsResumeOpen(false)}
-                  className="p-2 rounded-lg bg-zinc-900 text-zinc-400 hover:text-white border border-zinc-800 cursor-pointer"
-                >
-                  <X className="w-5 h-5" />
-                </button>
-              </div>
-            </div>
-
-            <div className="mt-6 space-y-6 text-sm text-zinc-300">
-              <div>
-                <h4 className="text-xs font-mono uppercase tracking-wider text-rose-400 mb-2">
-                  Summary
-                </h4>
-                <p className="leading-relaxed text-zinc-300">
-                  Senior Backend &amp; Full-Stack Software Engineer with 9.3+ years of
-                  experience building high-throughput Ruby on Rails platforms,
-                  multi-database enterprise APIs, event-sourced architectures, and
-                  real-time React applications. Proven track record optimizing database
-                  performance, Sidekiq fan-out pipelines, and LLM-integrated workflows.
-                </p>
-              </div>
-
-              <div>
-                <h4 className="text-xs font-mono uppercase tracking-wider text-rose-400 mb-3">
-                  Experience Highlights
-                </h4>
-                <div className="p-4 rounded-xl bg-zinc-900/60 border border-zinc-800 space-y-2">
-                  <div className="flex flex-wrap justify-between gap-2">
-                    <span className="font-bold text-white">
-                      Senior Software Engineer — Cornerstone OnDemand
-                    </span>
-                    <span className="text-xs font-mono text-zinc-400">
-                      Enterprise LMS Platform
-                    </span>
-                  </div>
-                  <ul className="list-disc list-inside text-xs sm:text-sm text-zinc-400 space-y-1.5 pt-1">
-                    <li>
-                      Architected multi-database routing and read-replica optimizations for
-                      high-concurrency LMS APIs.
-                    </li>
-                    <li>
-                      Designed isolated Sidekiq worker queues processing millions of
-                      asynchronous compliance and enrollment records reliably.
-                    </li>
-                    <li>
-                      Collaborated across distributed product teams on API contracts,
-                      observability (New Relic/Kibana), and zero-downtime migrations.
-                    </li>
-                  </ul>
-                </div>
-              </div>
-
-              <div>
-                <h4 className="text-xs font-mono uppercase tracking-wider text-rose-400 mb-2">
-                  Core Technical Skills
-                </h4>
-                <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed font-mono">
-                  Ruby (3.3/3.4) · Ruby on Rails (7/8) · PostgreSQL · MySQL · Redis ·
-                  Sidekiq · ActionCable · Rails Event Store (CQRS) · Kafka · React.js ·
-                  Redux · TypeScript · Tailwind CSS · OpenAI / LLM Streaming · AWS ·
-                  Docker · Kubernetes · RSpec
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
+      <ArchitectureModal
+        study={selectedCaseStudy}
+        onClose={() => setSelectedCaseStudy(null)}
+      />
+      <EngineeringNoteModal
+        note={selectedNote}
+        onClose={() => setSelectedNote(null)}
+      />
+      <ResumeModal
+        isOpen={isResumeOpen}
+        onClose={() => setIsResumeOpen(false)}
+      />
     </div>
   );
 }
