@@ -576,11 +576,11 @@ export default function App() {
 
             {/* Primary Headline */}
             <h1 className="text-center text-3xl sm:text-5xl lg:text-[3.4rem] font-extrabold tracking-tight text-white leading-[1.12] mb-6">
-              Gokul —{' '}
+              
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-rose-400 via-rose-500 to-amber-300">
-                Senior Ruby on Rails
+                Gokul —{' '} Senior Ruby on Rails Engineer
               </span>{' '}
-              &amp; Distributed Systems Engineer
+              
             </h1>
 
             {/* Subheadline */}

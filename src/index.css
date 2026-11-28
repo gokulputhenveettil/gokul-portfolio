@@ -1,6 +1,13 @@
 @import "tailwindcss";
 
 :root {
+  width: 100%;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  background-color: #09090b; /* Matches dark zinc-950 background edge-to-edge */
+  color: #f4f4f5;
+  overflow-x: hidden;
   --text: #6b6375;
   --text-h: #08060d;
   --bg: #fff;
@@ -55,9 +62,10 @@
 body {
   margin: 0;
 }
-
+html,
+body,
 #root {
-  width: 1126px;
+  /* width: 1126px; */
   max-width: 100%;
   margin: 0 auto;
   text-align: center;
@@ -66,6 +74,13 @@ body {
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
+  width: 100%;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  background-color: #09090b; /* Matches dark zinc-950 background edge-to-edge */
+  color: #f4f4f5;
+  overflow-x: hidden;
 }
 
 h1,
