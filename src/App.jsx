@@ -987,7 +987,7 @@ export default function App() {
                   Kerala, India — Remote / Relocation Ready
                 </div>
 
-                <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
+                <h2 className="contact-heading text-2xl sm:text-3xl font-bold text-white tracking-tight">
                   Let’s Architect Your Next High-Scale System
                 </h2>
 
